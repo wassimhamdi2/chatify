@@ -17,12 +17,14 @@ app.use("/api/messages", messageRouters);
 
 //make ready for deployment
 if (process.env.NODE_ENV === "production") {
-    app.use(express.static(path.join(__dirname, "../../frontend/dist")));
+    const distPath = path.join(__dirname, "../../frontend/dist");
+    console.log("Serving static from:", distPath);
+    
+    app.use(express.static(distPath));
 
     app.get("*", (_, res) => {
-        res.sendFile(path.join(__dirname, "../../frontend/dist/index.html"));
+        res.sendFile(path.join(distPath, "index.html"));
     });
-    console.log("we are in producation mode now");
 
 }
 app.listen(PORT, () => console.log("server is running on port " + PORT));
