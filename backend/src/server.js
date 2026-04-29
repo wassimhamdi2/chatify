@@ -1,15 +1,15 @@
 import express from "express";
-import dotenv from "dotenv";
 import { fileURLToPath } from "url";
 import path from "path";
 import authRouters from "./routers/auth.router.js";
 import messageRouters from "./routers/message.router.js";
 import { connectDB } from "./lib/db.js";
+import { ENV } from "./lib/env.js";
 
-dotenv.config();
+
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = ENV.PORT || 3000;
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -23,7 +23,7 @@ app.use("/api/messages", messageRouters);
 
 
 //make ready to deployement 
-if (process.env.NODE_ENV === "production") {
+if (ENV.NODE_ENV === "production") {
     const distPath = path.join(__dirname, "../../frontend/dist");
     console.log("Serving static from:", distPath);
 
