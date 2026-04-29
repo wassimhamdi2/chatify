@@ -38,6 +38,11 @@ export const signup = async (req, res) => {
         });
 
         if (newUser) {
+            // before CR:
+            // generateToken(newUser._id, res);
+            // await newUser.save();
+
+            // after CR:
             // Persist user first, then issue auth cookie
             const savedUser = await newUser.save();
             generateToken(savedUser._id, res);
