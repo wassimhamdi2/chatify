@@ -5,6 +5,8 @@ import authRouters from "./routers/auth.router.js";
 import messageRouters from "./routers/message.router.js";
 import { connectDB } from "./lib/db.js";
 import { ENV } from "./lib/env.js";
+import cookieParser from "cookie-parser";  
+
 
 
 
@@ -16,8 +18,11 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 app.use(express.json());
+app.use(cookieParser());    
+
 app.use("/api/auth", authRouters);
 app.use("/api/messages", messageRouters);
+
 
 
 
