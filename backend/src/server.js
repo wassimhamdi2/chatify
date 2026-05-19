@@ -6,19 +6,24 @@ import messageRouters from "./routers/message.router.js";
 import { connectDB } from "./lib/db.js";
 import { ENV } from "./lib/env.js";
 import cookieParser from "cookie-parser";  
+import cors from "cors";
+import { app, server } from "./lib/socket.js";
 
 
 
 
-const app = express();
 const PORT = ENV.PORT || 3000;
 
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-app.use(express.json());
+app.use(cors({ origin: ENV.CLIENT_URL, credentials: true }));
+//app.options("*", cors({ origin: ENV.CLIENT_URL, credentials: true })); 
 app.use(cookieParser());    
+app.use(express.json({ limit: "10mb" }));        
+app.use(express.urlencoded({ limit: "10mb", extended: true }));
+
 
 app.use("/api/auth", authRouters);
 app.use("/api/messages", messageRouters);
@@ -33,7 +38,7 @@ if (ENV.NODE_ENV === "production") {
     console.log("Serving static from:", distPath);
 
     app.use(express.static(distPath));
-
+    
     app.get("*", (_, res) => {
         res.sendFile(path.join(distPath, "index.html"));
     });
@@ -41,7 +46,7 @@ if (ENV.NODE_ENV === "production") {
 
 
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
     console.log("server is running on port " + PORT);
     connectDB();
 
