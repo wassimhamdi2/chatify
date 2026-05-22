@@ -23,7 +23,7 @@ function App() {
 
   return (
     <div
-      className="min-h-screen relative flex items-center justify-center overflow-hidden transition-colors duration-300 p-0 md:p-4"
+      className="min-h-screen relative flex items-center justify-center p-4 overflow-hidden transition-colors duration-300"
       style={{ backgroundColor: "var(--color-bg)" }}
     >
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f18_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f18_1px,transparent_1px)] bg-[size:14px_24px]" />

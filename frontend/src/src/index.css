@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@property --border-angle {
+  inherits: false;
+  initial-value: 0deg;
+  syntax: "<angle>";
+}
+
+/* ── CSS variables ─────────────────────────────────────────── */
+:root {
+  --color-primary:    #E63946;
+  --color-secondary:  #1D3557;
+  --color-accent:     #A8DADC;
+  --color-bg:         #F1FAEE;
+  --color-surface:    #E8F4F5;
+  --color-text:       #1D3557;
+  --color-text-muted: #4A6785;
+  --color-border:     #A8DADC;
+  --color-input-bg:   #E8F4F5;
+  --color-bubble-me:  #E63946;
+  --color-bubble-other: #E8F4F5;
+  --color-bubble-other-text: #1D3557;
+}
+
+.dark {
+  --color-primary:    #E63946;
+  --color-secondary:  #A8DADC;
+  --color-accent:     #A8DADC;
+  --color-bg:         #0F1B2D;
+  --color-surface:    #1D3557;
+  --color-text:       #F1FAEE;
+  --color-text-muted: #A8DADC;
+  --color-border:     #2A4A6B;
+  --color-input-bg:   #1A3050;
+  --color-bubble-me:  #E63946;
+  --color-bubble-other: #1D3557;
+  --color-bubble-other-text: #F1FAEE;
+}
+
+/* ── Base ──────────────────────────────────────────────────── */
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* ── Auth form shared classes ──────────────────────────────── */
+.input {
+  @apply w-full rounded-lg py-2 pl-10 pr-4 border transition-all;
+  background-color: var(--color-input-bg);
+  border-color: var(--color-border);
+  color: var(--color-text);
+}
+.input::placeholder { color: var(--color-text-muted); }
+.input:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-primary);
+  border-color: transparent;
+}
+
+.auth-input-icon {
+  @apply absolute left-3 top-1/2 -translate-y-1/2 size-5;
+  color: var(--color-text-muted);
+}
+
+.auth-input-label {
+  @apply block text-sm font-medium mb-2;
+  color: var(--color-text);
+}
+
+.auth-badge {
+  @apply inline-flex items-center px-3 py-1 text-xs font-medium rounded-full;
+  background-color: color-mix(in srgb, var(--color-primary) 15%, transparent);
+  color: var(--color-primary);
+}
+
+.auth-btn {
+  @apply w-full rounded-lg py-2.5 font-medium text-white transition-all;
+  background-color: var(--color-primary);
+}
+.auth-btn:hover { filter: brightness(0.9); }
+.auth-btn:focus { box-shadow: 0 0 0 2px var(--color-primary); }
+
+.auth-link {
+  @apply px-4 py-2 inline-block rounded-lg text-sm transition-colors;
+  background-color: color-mix(in srgb, var(--color-primary) 10%, transparent);
+  color: var(--color-primary);
+}
+.auth-link:hover { background-color: color-mix(in srgb, var(--color-primary) 20%, transparent); }

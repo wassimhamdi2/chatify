@@ -8,6 +8,7 @@ import { ENV } from "./lib/env.js";
 import cookieParser from "cookie-parser";  
 import cors from "cors";
 import { app, server } from "./lib/socket.js";
+import streamRouter from "./routers/stream.router.js";
 
 
 
@@ -27,7 +28,7 @@ app.use(express.urlencoded({ limit: "10mb", extended: true }));
 
 app.use("/api/auth", authRouters);
 app.use("/api/messages", messageRouters);
-
+app.use("/api/stream", streamRouter);
 
 
 

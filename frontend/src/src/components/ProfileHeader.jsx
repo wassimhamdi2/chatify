@@ -26,12 +26,12 @@ function ProfileHeader() {
   };
 
   return (
-    <div className="p-3 md:p-6 border-b transition-colors" style={{ borderColor: "var(--color-border)" }}>
+    <div className="p-6 border-b transition-colors" style={{ borderColor: "var(--color-border)" }}>
       <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2 md:gap-3">
+        <div className="flex items-center gap-3">
           <div className="avatar online">
             <button
-              className="size-10 md:size-14 rounded-full overflow-hidden relative group"
+              className="size-14 rounded-full overflow-hidden relative group"
               onClick={() => fileInputRef.current.click()}
             >
               <img
@@ -43,37 +43,53 @@ function ProfileHeader() {
                 <span className="text-white text-xs">Change</span>
               </div>
             </button>
-            <input type="file" accept="image/*" ref={fileInputRef} onChange={handleImageUpload} className="hidden" />
+            <input
+              type="file"
+              accept="image/*"
+              ref={fileInputRef}
+              onChange={handleImageUpload}
+              className="hidden"
+            />
           </div>
           <div>
-            <h3 className="font-medium text-sm md:text-base max-w-[100px] md:max-w-[150px] truncate"
-              style={{ color: "var(--color-text)" }}>
+            <h3 className="font-medium text-base max-w-[150px] truncate" style={{ color: "var(--color-text)" }}>
               {authUser.fullName}
             </h3>
             <p className="text-xs" style={{ color: "var(--color-primary)" }}>Online</p>
           </div>
         </div>
 
-        <div className="flex gap-2 md:gap-3 items-center">
-          <button className="transition-colors hover:opacity-80" style={{ color: "var(--color-text-muted)" }}
-            onClick={toggleTheme} title={isDark ? "Light mode" : "Dark mode"}>
-            {isDark ? <SunIcon className="size-4 md:size-5" /> : <MoonIcon className="size-4 md:size-5" />}
+        <div className="flex gap-3 items-center">
+          {/* DARK MODE TOGGLE */}
+          <button
+            className="transition-colors hover:opacity-80"
+            style={{ color: "var(--color-text-muted)" }}
+            onClick={toggleTheme}
+            title={isDark ? "Switch to light mode" : "Switch to dark mode"}
+          >
+            {isDark ? <SunIcon className="size-5" /> : <MoonIcon className="size-5" />}
           </button>
 
-          <button className="transition-colors hover:opacity-80" style={{ color: "var(--color-text-muted)" }}
+          {/* SOUND TOGGLE */}
+          <button
+            className="transition-colors hover:opacity-80"
+            style={{ color: "var(--color-text-muted)" }}
             onClick={() => {
               mouseClickSound.currentTime = 0;
-              mouseClickSound.play().catch(() => {});
+              mouseClickSound.play().catch((err) => console.log("Audio play failed:", err));
               toggleSound();
-            }}>
-            {isSoundEnabled
-              ? <Volume2Icon className="size-4 md:size-5" />
-              : <VolumeOffIcon className="size-4 md:size-5" />}
+            }}
+          >
+            {isSoundEnabled ? <Volume2Icon className="size-5" /> : <VolumeOffIcon className="size-5" />}
           </button>
 
-          <button className="transition-colors hover:opacity-80" style={{ color: "var(--color-text-muted)" }}
-            onClick={logout}>
-            <LogOutIcon className="size-4 md:size-5" />
+          {/* LOGOUT */}
+          <button
+            className="transition-colors hover:opacity-80"
+            style={{ color: "var(--color-text-muted)" }}
+            onClick={logout}
+          >
+            <LogOutIcon className="size-5" />
           </button>
         </div>
       </div>

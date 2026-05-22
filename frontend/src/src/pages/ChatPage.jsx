@@ -11,35 +11,27 @@ function ChatPage() {
   const { activeTab, selectedUser } = useChatStore();
 
   return (
-    <div className="relative w-full max-w-6xl h-screen md:h-[800px]">
+    <div className="relative w-full max-w-6xl h-[800px]">
       <BorderAnimatedContainer>
-
-        {/* LEFT SIDEBAR — full screen on mobile when no chat open */}
+        {/* LEFT SIDE */}
         <div
-          className={`
-            ${selectedUser ? "hidden md:flex" : "flex"}
-            w-full md:w-80 flex-col backdrop-blur-sm transition-colors shrink-0
-          `}
+          className="w-80 backdrop-blur-sm flex flex-col transition-colors"
           style={{ backgroundColor: "color-mix(in srgb, var(--color-surface) 60%, transparent)" }}
         >
           <ProfileHeader />
           <ActiveTabSwitch />
-          <div className="flex-1 overflow-y-auto p-3 md:p-4 space-y-2">
+          <div className="flex-1 overflow-y-auto p-4 space-y-2">
             {activeTab === "chats" ? <ChatsList /> : <ContactList />}
           </div>
         </div>
 
-        {/* RIGHT PANEL — full screen on mobile when chat open */}
+        {/* RIGHT SIDE */}
         <div
-          className={`
-            ${selectedUser ? "flex" : "hidden md:flex"}
-            flex-1 flex-col backdrop-blur-sm transition-colors min-w-0
-          `}
+          className="flex-1 flex flex-col backdrop-blur-sm transition-colors"
           style={{ backgroundColor: "color-mix(in srgb, var(--color-bg) 60%, transparent)" }}
         >
           {selectedUser ? <ChatContainer /> : <NoConversationPlaceholder />}
         </div>
-
       </BorderAnimatedContainer>
     </div>
   );

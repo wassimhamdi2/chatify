@@ -14,30 +14,23 @@ function SignUpPage() {
   };
 
   return (
-    <div className="w-full flex items-center justify-center p-2 md:p-4 min-h-screen md:min-h-0"
-      style={{ backgroundColor: "var(--color-bg)" }}>
-      <div className="relative w-full max-w-6xl md:h-[800px]">
+    <div className="w-full flex items-center justify-center p-4" style={{ backgroundColor: "var(--color-bg)" }}>
+      <div className="relative w-full max-w-6xl md:h-[800px] h-[650px]">
         <BorderAnimatedContainer>
-          <div className="w-full flex flex-col md:flex-row min-h-screen md:min-h-0">
-
-            {/* FORM */}
+          <div className="w-full flex flex-col md:flex-row">
+            {/* FORM — LEFT */}
             <div
-              className="w-full md:w-1/2 p-6 md:p-8 flex items-center justify-center md:border-r transition-colors"
+              className="md:w-1/2 p-8 flex items-center justify-center md:border-r transition-colors"
               style={{ borderColor: "var(--color-border)" }}
             >
               <div className="w-full max-w-md">
-                <div className="text-center mb-6 md:mb-8">
-                  <MessageCircleIcon className="w-10 h-10 md:w-12 md:h-12 mx-auto mb-3 md:mb-4"
-                    style={{ color: "var(--color-primary)" }} />
-                  <h2 className="text-xl md:text-2xl font-bold mb-2" style={{ color: "var(--color-text)" }}>
-                    Create Account
-                  </h2>
-                  <p className="text-sm md:text-base" style={{ color: "var(--color-text-muted)" }}>
-                    Sign up for a new account
-                  </p>
+                <div className="text-center mb-8">
+                  <MessageCircleIcon className="w-12 h-12 mx-auto mb-4" style={{ color: "var(--color-primary)" }} />
+                  <h2 className="text-2xl font-bold mb-2" style={{ color: "var(--color-text)" }}>Create Account</h2>
+                  <p style={{ color: "var(--color-text-muted)" }}>Sign up for a new account</p>
                 </div>
 
-                <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-6">
                   <div>
                     <label className="auth-input-label">Full Name</label>
                     <div className="relative">
@@ -70,23 +63,21 @@ function SignUpPage() {
                   </button>
                 </form>
 
-                <div className="mt-4 md:mt-6 text-center">
+                <div className="mt-6 text-center">
                   <Link to="/login" className="auth-link">Already have an account? Login</Link>
                 </div>
               </div>
             </div>
 
-            {/* ILLUSTRATION — desktop only */}
+            {/* ILLUSTRATION — RIGHT */}
             <div
               className="hidden md:w-1/2 md:flex items-center justify-center p-6 transition-colors"
               style={{ background: "linear-gradient(to bottom left, color-mix(in srgb, var(--color-surface) 40%, transparent), transparent)" }}
             >
               <div>
-                <img src="/signup.png" alt="Signup illustration" className="w-full h-auto object-contain" />
+                <img src="/signup.png" alt="People using mobile devices" className="w-full h-auto object-contain" />
                 <div className="mt-6 text-center">
-                  <h3 className="text-xl font-medium" style={{ color: "var(--color-primary)" }}>
-                    Start Your Journey Today
-                  </h3>
+                  <h3 className="text-xl font-medium" style={{ color: "var(--color-primary)" }}>Start Your Journey Today</h3>
                   <div className="mt-4 flex justify-center gap-4">
                     <span className="auth-badge">Free</span>
                     <span className="auth-badge">Easy Setup</span>
@@ -95,7 +86,6 @@ function SignUpPage() {
                 </div>
               </div>
             </div>
-
           </div>
         </BorderAnimatedContainer>
       </div>

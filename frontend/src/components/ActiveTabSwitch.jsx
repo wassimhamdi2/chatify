@@ -4,29 +4,22 @@ function ActiveTabSwitch() {
   const { activeTab, setActiveTab } = useChatStore();
 
   return (
-    <div className="tabs tabs-boxed bg-transparent p-2 m-2">
-      <button
-        onClick={() => setActiveTab("chats")}
-        className="tab transition-colors"
-        style={
-          activeTab === "chats"
-            ? { backgroundColor: "color-mix(in srgb, var(--color-primary) 15%, transparent)", color: "var(--color-primary)" }
-            : { color: "var(--color-text-muted)" }
-        }
-      >
-        Chats
-      </button>
-      <button
-        onClick={() => setActiveTab("contacts")}
-        className="tab transition-colors"
-        style={
-          activeTab === "contacts"
-            ? { backgroundColor: "color-mix(in srgb, var(--color-primary) 15%, transparent)", color: "var(--color-primary)" }
-            : { color: "var(--color-text-muted)" }
-        }
-      >
-        Contacts
-      </button>
+    <div className="flex border-b flex-shrink-0 transition-colors"
+      style={{ borderColor: "var(--color-border)" }}>
+      {["chats", "contacts"].map((tab) => (
+        <button
+          key={tab}
+          onClick={() => setActiveTab(tab)}
+          className="flex-1 py-3 text-sm font-medium capitalize transition-colors border-b-2"
+          style={{
+            borderColor: activeTab === tab ? "var(--color-primary)" : "transparent",
+            color: activeTab === tab ? "var(--color-primary)" : "var(--color-text-muted)",
+            backgroundColor: "transparent",
+          }}
+        >
+          {tab}
+        </button>
+      ))}
     </div>
   );
 }
