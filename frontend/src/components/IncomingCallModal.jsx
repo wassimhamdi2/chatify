@@ -1,10 +1,28 @@
+import { useEffect } from "react";
 import { PhoneIcon, PhoneOffIcon, VideoIcon } from "lucide-react";
 import { useCallStore } from "../store/useCallStore";
 import { useNavigate } from "react-router";
 
 function IncomingCallModal() {
-  const { callStatus, incomingCall, callType, acceptCall, declineCall } = useCallStore();
+  const { callStatus, incomingCall, callType, acceptCall, declineCall, dismissIncomingCall } = useCallStore();
   const navigate = useNavigate();
+
+  // Auto-dismiss when caller cancels or times out
+  useEffect(() => {
+    if (!incomingCall) return;
+
+    const handleCallEnded = () => dismissIncomingCall();
+
+    // call.ended fires when the caller cancels or times out
+    incomingCall.on("call.ended", handleCallEnded);
+    // call.rejected fires when the caller's timeout calls reject()
+    incomingCall.on("call.rejected", handleCallEnded);
+
+    return () => {
+      incomingCall.off("call.ended", handleCallEnded);
+      incomingCall.off("call.rejected", handleCallEnded);
+    };
+  }, [incomingCall, dismissIncomingCall]);
 
   if (callStatus !== "incoming" || !incomingCall) return null;
 

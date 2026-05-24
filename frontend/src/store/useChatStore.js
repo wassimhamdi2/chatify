@@ -7,6 +7,8 @@ export const useChatStore = create((set, get) => ({
   allContacts: [],
   chats: [],
   messages: [],
+  callHistory: [],
+  isCallHistoryLoading: false,
   activeTab: "chats",
   selectedUser: null,
   isUsersLoading: false,
@@ -20,6 +22,19 @@ export const useChatStore = create((set, get) => ({
 
   setActiveTab: (tab) => set({ activeTab: tab }),
   setSelectedUser: (selectedUser) => set({ selectedUser }),
+
+  getCallHistory: async () => {
+    set({ isCallHistoryLoading: true });
+    try {
+      const res = await axiosInstance.get("/calls/history");
+      set({ callHistory: res.data });
+    } catch (error) {
+      // Silently fail — call history endpoint may not exist yet
+      set({ callHistory: [] });
+    } finally {
+      set({ isCallHistoryLoading: false });
+    }
+  },
 
   getAllContacts: async () => {
     set({ isUsersLoading: true });

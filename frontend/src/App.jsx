@@ -9,6 +9,7 @@ import PageLoader from "./components/PageLoader";
 import { useThemeStore } from "./store/useThemeStore";
 import { Toaster } from "react-hot-toast";
 import IncomingCallModal from "./components/IncomingCallModal";
+import WaitingCallScreen from "./components/WaitingCallScreen";
 
 function App() {
   const { checkAuth, isCheckingAuth, authUser } = useAuthStore();
@@ -39,6 +40,7 @@ function App() {
 
       <Toaster />
       <IncomingCallModal />
+      <WaitingCallScreen />
     </div>
   );
 }

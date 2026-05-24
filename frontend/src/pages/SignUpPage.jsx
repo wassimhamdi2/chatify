@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAuthStore } from "../store/useAuthStore";
 import BorderAnimatedContainer from "../components/BorderAnimatedContainer";
-import { MessageCircleIcon, LockIcon, MailIcon, UserIcon, LoaderIcon } from "lucide-react";
+import { LockIcon, MailIcon, UserIcon, LoaderIcon } from "lucide-react";
 import { Link } from "react-router";
 
 function SignUpPage() {
@@ -27,8 +27,7 @@ function SignUpPage() {
             >
               <div className="w-full max-w-md">
                 <div className="text-center mb-6 md:mb-8">
-                  <MessageCircleIcon className="w-10 h-10 md:w-12 md:h-12 mx-auto mb-3 md:mb-4"
-                    style={{ color: "var(--color-primary)" }} />
+                  <img src="/logo1.png" alt="Hkeya logo" className="w-39 h-39 md:w-42 md:h-42 mx-auto mb-3 md:mb-4 object-contain" />
                   <h2 className="text-xl md:text-2xl font-bold mb-2" style={{ color: "var(--color-text)" }}>
                     Create Account
                   </h2>
