@@ -8,7 +8,7 @@ A full-stack real-time chat application built with React, Node.js, Socket.IO, an
 
 ## 🌐 Live Demo
 
-🔗 [Visit Hkeya](https://your-website-url.com) <!-- Replace with your actual URL -->
+🔗 [Visit Hkeya](https://chatify-g3vc.onrender.com/)
 
 ---
 
@@ -175,7 +175,7 @@ hkeya/
 
 | Incoming Call | Call Received |
 |---------------|---------------|
-| ![Incoming](./frontend/public/screenshot/callsend.PNG) | ![Received](./frontend/public/screenshot/callReceived.PNG) |
+| ![Outgoing Call](./frontend/public/screenshot/callsend.PNG) | ![Incoming Call](./frontend/public/screenshot/callReceived.PNG) |
 
 ---
 
