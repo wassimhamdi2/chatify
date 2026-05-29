@@ -173,7 +173,7 @@ hkeya/
 |------|----------|-------------|
 | ![Chat](./frontend/public/screenshot/chatPage.PNG) | ![Contacts](./frontend/public/screenshot/contact.PNG) | ![Call](./frontend/public/screenshot/callScreen.PNG) |
 
-| Incoming Call | Call Received |
+| Outgoing Call | Incoming Call|
 |---------------|---------------|
 | ![Outgoing Call](./frontend/public/screenshot/callsend.PNG) | ![Incoming Call](./frontend/public/screenshot/callReceived.PNG) |
 
