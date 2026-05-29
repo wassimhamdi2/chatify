@@ -2,7 +2,7 @@
 
 A full-stack real-time chat application built with React, Node.js, Socket.IO, and Stream Video — featuring instant messaging, video & voice calls, image sharing, and a beautiful responsive UI.
 
-![Hkeya Preview](./frontend/public/logo1.PNG)
+![Hkeya Preview](./frontend/public/logo1.png)
 
 ---
 
