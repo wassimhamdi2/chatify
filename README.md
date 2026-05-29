@@ -1,8 +1,14 @@
-# 💬 Chatify
+# 💬 Hkeya
 
 A full-stack real-time chat application built with React, Node.js, Socket.IO, and Stream Video — featuring instant messaging, video & voice calls, image sharing, and a beautiful responsive UI.
 
-![Chatify Preview](./frontend/public/logo1.png)
+![Hkeya Preview](./frontend/public/screenshot/homePage.PNG)
+
+---
+
+## 🌐 Live Demo
+
+🔗 [Visit Hkeya](https://your-website-url.com) <!-- Replace with your actual URL -->
 
 ---
 
@@ -94,7 +100,7 @@ STREAM_API_SECRET=your_stream_api_secret
 
 RESEND_API_KEY=your_resend_api_key
 EMAIL_FROM=onboarding@resend.dev
-EMAIL_FROM_NAME=Chatify
+EMAIL_FROM_NAME=Hkeya
 
 ARCJET_KEY=your_arcjet_key
 ARCJET_ENV=development
@@ -136,7 +142,7 @@ http://localhost:5173
 ## 📁 Project Structure
 
 ```
-chatify/
+hkeya/
 ├── backend/
 │   └── src/
 │       ├── controllers/     # Route handlers
@@ -159,9 +165,17 @@ chatify/
 
 ## 📸 Screenshots
 
-| Login | Chat | Video Call |
-|-------|------|------------|
-| ![Login](./frontend/public/login.png) | ![Chat](./frontend/public/logo2.png) | ![Call](./frontend/public/logo3.png) |
+| Home | Login | Sign Up |
+|------|-------|---------|
+| ![Home](./frontend/public/screenshot/homePage.PNG) | ![Login](./frontend/public/screenshot/login.PNG) | ![Sign Up](./frontend/public/screenshot/signup.PNG) |
+
+| Chat | Contacts | Call Screen |
+|------|----------|-------------|
+| ![Chat](./frontend/public/screenshot/chatPage.PNG) | ![Contacts](./frontend/public/screenshot/contact.PNG) | ![Call](./frontend/public/screenshot/callScreen.PNG) |
+
+| Incoming Call | Call Received |
+|---------------|---------------|
+| ![Incoming](./frontend/public/screenshot/callsend.PNG) | ![Received](./frontend/public/screenshot/callReceived.PNG) |
 
 ---
 
