@@ -1,6 +1,6 @@
 import { MessageCircleIcon } from "lucide-react";
 
-const NoChatHistoryPlaceholder = ({ name }) => (
+const NoChatHistoryPlaceholder = ({ name, onSend }) => (
   <div className="flex flex-col items-center justify-center h-full text-center p-6">
     <div className="w-16 h-16 rounded-full flex items-center justify-center mb-5"
       style={{ background: "color-mix(in srgb, var(--color-primary) 15%, transparent)" }}>
@@ -13,12 +13,14 @@ const NoChatHistoryPlaceholder = ({ name }) => (
       <p className="text-sm" style={{ color: "var(--color-text-muted)" }}>
         This is the beginning of your conversation. Send a message to start chatting!
       </p>
-      <div className="h-px w-32 mx-auto" style={{ background: "linear-gradient(to right, transparent, var(--color-primary), transparent)", opacity: 0.4 }} />
+      <div className="h-px w-32 mx-auto"
+        style={{ background: "linear-gradient(to right, transparent, var(--color-primary), transparent)", opacity: 0.4 }} />
     </div>
     <div className="flex flex-wrap gap-2 justify-center">
-      {["👋 Say Hello", "🤝 How are you?", "📅 Meet up soon?"].map((label) => (
+      {["👋 Hello", "🤝 How are you?", "📅 Meet up soon?"].map((label) => (
         <button key={label}
-          className="px-4 py-2 text-xs font-medium rounded-full transition-colors"
+          onClick={() => onSend(label)}
+          className="px-4 py-2 text-xs font-medium rounded-full transition-colors hover:opacity-80"
           style={{
             color: "var(--color-primary)",
             backgroundColor: "color-mix(in srgb, var(--color-primary) 10%, transparent)"

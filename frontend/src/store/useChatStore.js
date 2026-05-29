@@ -28,8 +28,7 @@ export const useChatStore = create((set, get) => ({
     try {
       const res = await axiosInstance.get("/calls/history");
       set({ callHistory: res.data });
-    } catch (error) {
-      // Silently fail — call history endpoint may not exist yet
+    } catch {
       set({ callHistory: [] });
     } finally {
       set({ isCallHistoryLoading: false });
@@ -47,6 +46,7 @@ export const useChatStore = create((set, get) => ({
       set({ isUsersLoading: false });
     }
   },
+
   getMyChatPartners: async () => {
     set({ isUsersLoading: true });
     try {
@@ -74,9 +74,7 @@ export const useChatStore = create((set, get) => ({
   sendMessage: async (messageData) => {
     const { selectedUser, messages } = get();
     const { authUser } = useAuthStore.getState();
-
     const tempId = `temp-${Date.now()}`;
-
     const optimisticMessage = {
       _id: tempId,
       senderId: authUser._id,
@@ -84,45 +82,71 @@ export const useChatStore = create((set, get) => ({
       text: messageData.text,
       image: messageData.image,
       createdAt: new Date().toISOString(),
-      isOptimistic: true, // flag to identify optimistic messages (optional)
+      isOptimistic: true,
     };
-    // immidetaly update the ui by adding the message
     set({ messages: [...messages, optimisticMessage] });
-
     try {
       const res = await axiosInstance.post(`/messages/send/${selectedUser._id}`, messageData);
       set({ messages: messages.concat(res.data) });
     } catch (error) {
-      // remove optimistic message on failure
-      set({ messages: messages });
+      set({ messages });
       toast.error(error.response?.data?.message || "Something went wrong");
+    }
+  },
+
+  // ── Delete a single message ──────────────────────────────
+  deleteMessage: async (messageId) => {
+    try {
+      await axiosInstance.delete(`/messages/message/${messageId}`);
+      set({ messages: get().messages.filter((m) => m._id !== messageId) });
+      toast.success("Message deleted");
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Could not delete message");
+    }
+  },
+
+  // ── Delete entire conversation ───────────────────────────
+  deleteConversation: async () => {
+    const { selectedUser } = get();
+    if (!selectedUser) return;
+    try {
+      await axiosInstance.delete(`/messages/conversation/${selectedUser._id}`);
+      set({ messages: [], chats: get().chats.filter((c) => c._id !== selectedUser._id), selectedUser: null });
+      toast.success("Conversation deleted");
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Could not delete conversation");
     }
   },
 
   subscribeToMessages: () => {
     const { selectedUser, isSoundEnabled } = get();
     if (!selectedUser) return;
-
     const socket = useAuthStore.getState().socket;
 
     socket.on("newMessage", (newMessage) => {
-      const isMessageSentFromSelectedUser = newMessage.senderId === selectedUser._id;
-      if (!isMessageSentFromSelectedUser) return;
-
-      const currentMessages = get().messages;
-      set({ messages: [...currentMessages, newMessage] });
-
+      if (newMessage.senderId !== selectedUser._id) return;
+      set({ messages: [...get().messages, newMessage] });
       if (isSoundEnabled) {
         const notificationSound = new Audio("/sounds/notification.mp3");
-
-        notificationSound.currentTime = 0; // reset to start
-        notificationSound.play().catch((e) => console.log("Audio play failed:", e));
+        notificationSound.currentTime = 0;
+        notificationSound.play().catch(() => {});
       }
+    });
+
+    // real-time delete sync
+    socket.on("messageDeleted", (messageId) => {
+      set({ messages: get().messages.filter((m) => m._id !== messageId) });
+    });
+
+    socket.on("conversationDeleted", () => {
+      set({ messages: [] });
     });
   },
 
   unsubscribeFromMessages: () => {
     const socket = useAuthStore.getState().socket;
     socket.off("newMessage");
+    socket.off("messageDeleted");
+    socket.off("conversationDeleted");
   },
 }));
